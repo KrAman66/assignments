@@ -14,7 +14,18 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  const arr = [];
+  for(let i = 0; i < transactions.length; i++){
+    let cat = transactions[i].category;
+    var found = arr.find(item => item['category'] === cat);
+    if(found){
+      found.totalSpent = found.totalSpent + transactions[i].price;
+    }else{
+      let obj = {category: cat, totalSpent: transactions[i].price};
+      arr.push(obj);
+    }
+  }
+  return arr;
 }
 
 module.exports = calculateTotalSpentByCategory;
