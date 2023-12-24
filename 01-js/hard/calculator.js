@@ -15,7 +15,48 @@
 
   Once you've implemented the logic, test your code by running
 */
+function computeExpr(str = ''){
+  str = str.replace(/\s/g, "");
+  const result = eval(str);
+  if (typeof result !== 'number' || isNaN(result)) {
+      throw new Error('Invalid result');
+  }
+  else if (!isFinite(result)) {
+    throw new Error('Division by zero');
+  }
+  return result;
+  
+};
 
-class Calculator {}
+class Calculator {
+  constructor(){
+    this.result = 0;
+  }
+
+  add(num){
+    this.result+=num;
+  }
+  subtract(num){
+    this.result-=num;
+  }
+  multiply(num){
+    this.result*=num;
+  }
+  divide(num){
+    if(num == 0){
+      throw new Error("Division by zero is not possible.");
+    }
+    this.result = this.result / num;
+  }
+  clear(){
+    this.result = 0;
+  }
+  getResult(){
+    return this.result;
+  }
+  calculate(expr){
+    this.result = computeExpr(expr);  
+  }
+}
 
 module.exports = Calculator;
